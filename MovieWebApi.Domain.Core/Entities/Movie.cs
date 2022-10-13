@@ -14,6 +14,8 @@ namespace MovieWebApi.Domain.Core.Entities
         public string Name { get; set; }
         public string? Description { get; set; }
         public double? Rating { get; set; }
+
+        [Required(ErrorMessage = "Genre is required field for movie")]
         public string Genre { get; set; }
     }
 }
