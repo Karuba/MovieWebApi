@@ -2,7 +2,7 @@
 using System.Data.Entity;
 using System.Linq.Expressions;
 
-namespace MovieWebApi.Infrastructure.Data.Repositories
+namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
 {
     internal abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {

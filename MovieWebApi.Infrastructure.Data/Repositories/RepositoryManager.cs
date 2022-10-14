@@ -1,4 +1,5 @@
 ﻿using MovieWebApi.Domain.Interfaces.Repositories;
+using MovieWebApi.Infrastructure.Data.Repositories.Repositories;
 
 namespace MovieWebApi.Infrastructure.Data.Repositories
 {

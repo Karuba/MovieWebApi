@@ -3,13 +3,13 @@ using MovieWebApi.Domain.Core.Entities;
 using MovieWebApi.Domain.Interfaces.Repositories;
 using MovieWebApi.Domain.Interfaces.RequestFeatures;
 
-namespace MovieWebApi.Infrastructure.Data.Repositories
+namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
 {
     internal class MovieRepository : RepositoryBase<Movie>, IMovieRepository
     {
         private readonly RepositoryContext _repositoryContext;
 
-        public MovieRepository(RepositoryContext repositoryContext) 
+        public MovieRepository(RepositoryContext repositoryContext)
             : base(repositoryContext)
         {
         }
