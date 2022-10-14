@@ -23,5 +23,12 @@ namespace MovieWebApi.Infrastructure.Data.Repositories
             .Skip(movieParameters.PageSize * (movieParameters.PageNumber - 1))
             .Take(movieParameters.PageSize)
             .ToListAsync();
+
+        public void AddMovie(Movie movie) => Create(movie);
+
+        public void UpdateMovie(Movie movie) => Update(movie);
+
+        public void DeleteMovie(Movie movie) => Delete(movie);
+
     }
 }
