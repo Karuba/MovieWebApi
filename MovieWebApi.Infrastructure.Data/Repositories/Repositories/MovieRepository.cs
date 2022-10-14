@@ -7,8 +7,6 @@ namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
 {
     internal class MovieRepository : RepositoryBase<Movie>, IMovieRepository
     {
-        private readonly RepositoryContext _repositoryContext;
-
         public MovieRepository(RepositoryContext repositoryContext)
             : base(repositoryContext)
         {
@@ -19,7 +17,7 @@ namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
 
         public async Task<IEnumerable<Movie>> GetMoviesAsync(MovieParameters movieParameters, bool trackChanges = false) =>
             await FindAll(trackChanges)
-            .OrderBy(e => e)
+            .OrderBy(e => e.Name)
             .Skip(movieParameters.PageSize * (movieParameters.PageNumber - 1))
             .Take(movieParameters.PageSize)
             .ToListAsync();
