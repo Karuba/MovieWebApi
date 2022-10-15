@@ -9,6 +9,8 @@ namespace MovieWebApi.Contracts.Dto.Mapping
         public MappingProfile()
         {
             CreateMap<Movie, MovieDto>().ReverseMap();
+            CreateMap<Movie, MovieCreateDto>().ReverseMap();
+            CreateMap<Movie, MovieUpdateDto>().ReverseMap();
         }
     }
 }

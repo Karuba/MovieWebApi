@@ -1,9 +1,11 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace MovieWebApi.Contracts.Dto
 {
-    public class MovieDto
+    public class MovieCreateDto
     {
-        public Guid Id { get; set; }
+        [Required(ErrorMessage = "Name is required field for movie")]
         public string Name { get; set; }
         public string? Description { get; set; }
         public double? Rating { get; set; }
