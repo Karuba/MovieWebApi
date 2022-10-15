@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MovieWebApi.Migrations
+namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 {
-    public partial class InitDatabase : Migration
+    public partial class LionKing : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,8 @@ namespace MovieWebApi.Migrations
                 columns: table => new
                 {
                     MovieId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     Rating = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>

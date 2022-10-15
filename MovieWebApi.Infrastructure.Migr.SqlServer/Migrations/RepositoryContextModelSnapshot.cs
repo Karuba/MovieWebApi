@@ -8,7 +8,7 @@ using MovieWebApi.Infrastructure.Data;
 
 #nullable disable
 
-namespace MovieWebApi.Migrations
+namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
     partial class RepositoryContextModelSnapshot : ModelSnapshot
@@ -30,18 +30,20 @@ namespace MovieWebApi.Migrations
                         .HasColumnName("MovieId");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<double?>("Rating")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movie", (string)null);
+                    b.ToTable("Movie");
 
                     b.HasData(
                         new

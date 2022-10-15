@@ -9,11 +9,11 @@ using MovieWebApi.Infrastructure.Data;
 
 #nullable disable
 
-namespace MovieWebApi.Migrations
+namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20221014131035_InitDatabase")]
-    partial class InitDatabase
+    [Migration("20221015110604_Lion King")]
+    partial class LionKing
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,11 +32,13 @@ namespace MovieWebApi.Migrations
                         .HasColumnName("MovieId");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<double?>("Rating")
                         .HasColumnType("float");
