@@ -9,7 +9,7 @@ namespace MovieWebApi.Services.Interfaces
         Task<IEnumerable<MovieDto>> GetMoviesAsync(MovieParameters movieParameters);
         Task<MovieDto> GetMovieAsync(Guid id);
         Task<MovieDto> UpdateMovieAsync(Guid id, MovieUpdateDto movie);
-        void DeleteMovie(Movie movie);
-        void AddMovie(Movie movie);
+        Task DeleteMovie(Guid id);
+        Task<MovieDto> CreateMovie(MovieCreateDto movie);
     }
 }
