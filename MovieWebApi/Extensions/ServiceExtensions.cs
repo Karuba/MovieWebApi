@@ -29,8 +29,8 @@ namespace MovieWebApi.Extensions
             IConfiguration configuration) =>
             //services.AddDbContext<RepositoryContext>(options =>
             //        options.UseSqlServer(configuration.GetConnectionString("SqlServer"), b =>
-            //            b.MigrationsAssembly("MovieWebApi")));
-                ConnectionExtension.ConfigureDatabaseContext(services, configuration);
+            //            b.MigrationsAssembly("MovieWebApi.Infrastructure.Migr.SqlServer")));
+            ConnectionExtension.ConfigureDatabaseContext(services, configuration);
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
             services.AddScoped<IRepositoryManager, RepositoryManager>();
         //public static void ConfigureExceptionHandlerMiddleware(this IServiceCollection services) =>

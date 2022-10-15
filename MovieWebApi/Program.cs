@@ -16,8 +16,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureServiceManager();
+builder.Services.ConfigureDatabaseContext(builder.Configuration);
 
-ServiceExtensions.ConfigureDatabaseContext(builder.Services, builder.Configuration);
+//ServiceExtensions.ConfigureDatabaseContext(builder.Services, builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 //builder.Services.ConfigureExceptionHandlerMiddleware();
