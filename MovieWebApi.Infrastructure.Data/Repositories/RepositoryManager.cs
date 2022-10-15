@@ -3,7 +3,7 @@ using MovieWebApi.Infrastructure.Data.Repositories.Repositories;
 
 namespace MovieWebApi.Infrastructure.Data.Repositories
 {
-    internal class RepositoryManager : IRepositoryManager
+    public class RepositoryManager : IRepositoryManager
     {
         private readonly RepositoryContext _repositoryContext;
         private IMovieRepository _movieRepository;

@@ -5,7 +5,7 @@ using MovieWebApi.Domain.Interfaces.RequestFeatures;
 
 namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
 {
-    internal class MovieRepository : RepositoryBase<Movie>, IMovieRepository
+    public class MovieRepository : RepositoryBase<Movie>, IMovieRepository
     {
         public MovieRepository(RepositoryContext repositoryContext)
             : base(repositoryContext)
