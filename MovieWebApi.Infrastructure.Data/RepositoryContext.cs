@@ -13,7 +13,11 @@ namespace MovieWebApi.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder model)
         {
             model.ApplyConfiguration(new MovieConfiguration());
+            model.ApplyConfiguration(new StarringConfiguration());
+            model.ApplyConfiguration(new MovieStarringConfiguration());
         }
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<Starring> Starrings { get; set; }
+        public DbSet<MovieStarring> MovieStarrings { get; set; }
     }
 }

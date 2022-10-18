@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieWebApi.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using MovieWebApi.Infrastructure.Data;
 namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20221017104300_InitNewData3")]
+    partial class InitNewData3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,28 +76,6 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
                     b.HasIndex("StarringId");
 
                     b.ToTable("MovieStarrings");
-
-                    b.HasData(
-                        new
-                        {
-                            MovieId = new Guid("01abbca8-664d-4b20-b5de-024705497d4a"),
-                            StarringId = new Guid("11abbca8-664d-4b20-b5de-024705497d4a")
-                        },
-                        new
-                        {
-                            MovieId = new Guid("02abbca8-664d-4b20-b5de-024705497d4a"),
-                            StarringId = new Guid("12abbca8-664d-4b20-b5de-024705497d4a")
-                        },
-                        new
-                        {
-                            MovieId = new Guid("02abbca8-664d-4b20-b5de-024705497d4a"),
-                            StarringId = new Guid("11abbca8-664d-4b20-b5de-024705497d4a")
-                        },
-                        new
-                        {
-                            MovieId = new Guid("01abbca8-664d-4b20-b5de-024705497d4a"),
-                            StarringId = new Guid("12abbca8-664d-4b20-b5de-024705497d4a")
-                        });
                 });
 
             modelBuilder.Entity("MovieWebApi.Domain.Core.Entities.Starring", b =>

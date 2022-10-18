@@ -8,9 +8,16 @@ namespace MovieWebApi.Contracts.Dto.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<Movie, MovieDto>().ReverseMap();
+            CreateMap<Movie, MovieDto>().ForMember(c => c.Starrings, opt => opt.MapFrom(x => x.MovieStarrings.Select(x => x.Starring).Select(x => new StarringDto
+            {
+                Description = x.Description,
+                FirstName = x.FirstName,
+                SecondName = x.SecondName,
+                Id = x.Id,
+            })));
             CreateMap<Movie, MovieCreateDto>().ReverseMap();
             CreateMap<Movie, MovieUpdateDto>().ReverseMap();
+            CreateMap<Starring, StarringDto>().ReverseMap();
         }
     }
 }

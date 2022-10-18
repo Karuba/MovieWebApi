@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MovieWebApi.Domain.Core.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace MovieWebApi.Contracts.Dto
 {
@@ -11,5 +12,6 @@ namespace MovieWebApi.Contracts.Dto
         public string? Description { get; set; }
         [Range(0, 5, ErrorMessage = "The Rating must contain integer values in the range from 0 to 5 ")]
         public double? Rating { get; set; }
+        //public List<MovieStarring> Starrings { get; set; }
     }
 }

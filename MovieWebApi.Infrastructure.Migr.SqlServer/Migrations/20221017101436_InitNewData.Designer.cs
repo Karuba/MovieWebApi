@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieWebApi.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using MovieWebApi.Infrastructure.Data;
 namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20221017101436_InitNewData")]
+    partial class InitNewData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +23,21 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("MovieStarring", b =>
+                {
+                    b.Property<Guid>("MoviesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("StarringsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("MoviesId", "StarringsId");
+
+                    b.HasIndex("StarringsId");
+
+                    b.ToTable("MovieStarring");
+                });
 
             modelBuilder.Entity("MovieWebApi.Domain.Core.Entities.Movie", b =>
                 {
@@ -63,13 +80,19 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 
             modelBuilder.Entity("MovieWebApi.Domain.Core.Entities.MovieStarring", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("MovieId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("StarringId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("MovieId", "StarringId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
 
                     b.HasIndex("StarringId");
 
@@ -78,21 +101,25 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
                     b.HasData(
                         new
                         {
+                            Id = new Guid("cb1cced4-6fa8-463c-b03c-3d82ec10ce35"),
                             MovieId = new Guid("01abbca8-664d-4b20-b5de-024705497d4a"),
                             StarringId = new Guid("11abbca8-664d-4b20-b5de-024705497d4a")
                         },
                         new
                         {
+                            Id = new Guid("fa40dd43-0867-49aa-95f8-42c04406942f"),
                             MovieId = new Guid("02abbca8-664d-4b20-b5de-024705497d4a"),
                             StarringId = new Guid("12abbca8-664d-4b20-b5de-024705497d4a")
                         },
                         new
                         {
+                            Id = new Guid("161b89eb-4dde-474b-894c-75be72212e86"),
                             MovieId = new Guid("02abbca8-664d-4b20-b5de-024705497d4a"),
                             StarringId = new Guid("11abbca8-664d-4b20-b5de-024705497d4a")
                         },
                         new
                         {
+                            Id = new Guid("9bc7c0a4-eb40-4c72-8969-0e5442a20cce"),
                             MovieId = new Guid("01abbca8-664d-4b20-b5de-024705497d4a"),
                             StarringId = new Guid("12abbca8-664d-4b20-b5de-024705497d4a")
                         });
@@ -140,16 +167,31 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MovieStarring", b =>
+                {
+                    b.HasOne("MovieWebApi.Domain.Core.Entities.Movie", null)
+                        .WithMany()
+                        .HasForeignKey("MoviesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieWebApi.Domain.Core.Entities.Starring", null)
+                        .WithMany()
+                        .HasForeignKey("StarringsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("MovieWebApi.Domain.Core.Entities.MovieStarring", b =>
                 {
                     b.HasOne("MovieWebApi.Domain.Core.Entities.Movie", "Movie")
-                        .WithMany("MovieStarrings")
+                        .WithMany()
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MovieWebApi.Domain.Core.Entities.Starring", "Starring")
-                        .WithMany("MovieStarrings")
+                        .WithMany()
                         .HasForeignKey("StarringId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -157,16 +199,6 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
                     b.Navigation("Movie");
 
                     b.Navigation("Starring");
-                });
-
-            modelBuilder.Entity("MovieWebApi.Domain.Core.Entities.Movie", b =>
-                {
-                    b.Navigation("MovieStarrings");
-                });
-
-            modelBuilder.Entity("MovieWebApi.Domain.Core.Entities.Starring", b =>
-                {
-                    b.Navigation("MovieStarrings");
                 });
 #pragma warning restore 612, 618
         }

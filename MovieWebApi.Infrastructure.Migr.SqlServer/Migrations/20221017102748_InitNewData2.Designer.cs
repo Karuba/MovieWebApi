@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieWebApi.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using MovieWebApi.Infrastructure.Data;
 namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20221017102748_InitNewData2")]
+    partial class InitNewData2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,13 +65,19 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 
             modelBuilder.Entity("MovieWebApi.Domain.Core.Entities.MovieStarring", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("MovieId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("StarringId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("MovieId", "StarringId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
 
                     b.HasIndex("StarringId");
 
@@ -78,21 +86,25 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
                     b.HasData(
                         new
                         {
+                            Id = new Guid("687ba901-8133-4a53-a520-9263454f25bb"),
                             MovieId = new Guid("01abbca8-664d-4b20-b5de-024705497d4a"),
                             StarringId = new Guid("11abbca8-664d-4b20-b5de-024705497d4a")
                         },
                         new
                         {
+                            Id = new Guid("469bf1bf-5c19-4d8d-bc02-201e0db8c17b"),
                             MovieId = new Guid("02abbca8-664d-4b20-b5de-024705497d4a"),
                             StarringId = new Guid("12abbca8-664d-4b20-b5de-024705497d4a")
                         },
                         new
                         {
+                            Id = new Guid("9aa1be55-7b9b-4798-893a-e00b0c9c8373"),
                             MovieId = new Guid("02abbca8-664d-4b20-b5de-024705497d4a"),
                             StarringId = new Guid("11abbca8-664d-4b20-b5de-024705497d4a")
                         },
                         new
                         {
+                            Id = new Guid("b94d3e00-143e-4208-8c0d-650b5192bf8e"),
                             MovieId = new Guid("01abbca8-664d-4b20-b5de-024705497d4a"),
                             StarringId = new Guid("12abbca8-664d-4b20-b5de-024705497d4a")
                         });
@@ -143,13 +155,13 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
             modelBuilder.Entity("MovieWebApi.Domain.Core.Entities.MovieStarring", b =>
                 {
                     b.HasOne("MovieWebApi.Domain.Core.Entities.Movie", "Movie")
-                        .WithMany("MovieStarrings")
+                        .WithMany("Starrings")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MovieWebApi.Domain.Core.Entities.Starring", "Starring")
-                        .WithMany("MovieStarrings")
+                        .WithMany("Movies")
                         .HasForeignKey("StarringId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -161,12 +173,12 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 
             modelBuilder.Entity("MovieWebApi.Domain.Core.Entities.Movie", b =>
                 {
-                    b.Navigation("MovieStarrings");
+                    b.Navigation("Starrings");
                 });
 
             modelBuilder.Entity("MovieWebApi.Domain.Core.Entities.Starring", b =>
                 {
-                    b.Navigation("MovieStarrings");
+                    b.Navigation("Movies");
                 });
 #pragma warning restore 612, 618
         }
