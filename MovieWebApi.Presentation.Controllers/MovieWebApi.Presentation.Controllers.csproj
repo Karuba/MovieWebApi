@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\University-3-6\my_shit\C#\WebApi\CompanyEmpoyees\LoggerService\LoggerService.csproj" />
     <ProjectReference Include="..\MovieWebApi.Services.Interfaces\MovieWebApi.Services.Interfaces.csproj" />
   </ItemGroup>
 

@@ -20,6 +20,7 @@ namespace MovieWebApi.Contracts.Dto.Mapping
             CreateMap<Starring, StarringDto>().ReverseMap();
             CreateMap<Starring, StarringCreateDto>().ReverseMap();
             CreateMap<Starring, StarringUpdateDto>().ReverseMap();
+            CreateMap<User, UserRegistrationDto>().ReverseMap();
         }
     }
 }

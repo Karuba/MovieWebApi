@@ -1,5 +1,7 @@
 ﻿using LoggerService;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MovieWebApi.Domain.Core.Entities;
 using MovieWebApi.Domain.Interfaces.Repositories;
 using MovieWebApi.Infrastructure.Business;
 using MovieWebApi.Infrastructure.Data;
@@ -38,5 +40,20 @@ namespace MovieWebApi.Extensions
             services.AddScoped<ILoggerManager, LoggerManager>();
         //public static void ConfigureExceptionHandlerMiddleware(this IServiceCollection services) =>
         //    services.AddTransient<ExceptionHandlingMiddleware>();
+        public static void ConfigureIdentity(this IServiceCollection services)
+        {
+            var builder = services.AddIdentityCore<User>(o =>
+            {
+                o.Password.RequireDigit = true;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireUppercase = false;
+                o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequiredLength = 2;
+                o.User.RequireUniqueEmail = true;
+            });
+            builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
+            builder.AddEntityFrameworkStores<RepositoryContext>()
+                    .AddDefaultTokenProviders();
+        }
     }
 }

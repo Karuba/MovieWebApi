@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\University-3-6\my_shit\C#\WebApi\CompanyEmpoyees\LoggerService\LoggerService.csproj" />
     <ProjectReference Include="..\MovieWebApi.Infrastructure.Business\MovieWebApi.Infrastructure.Business.csproj" />
     <ProjectReference Include="..\MovieWebApi.Infrastructure.Migr.SqlServer\MovieWebApi.Infrastructure.Migr.SqlServer.csproj" />
     <ProjectReference Include="..\MovieWebApi.Presentation.Controllers\MovieWebApi.Presentation.Controllers.csproj" />

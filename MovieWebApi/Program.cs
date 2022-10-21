@@ -1,3 +1,4 @@
+using LoggerService;
 using MovieWebApi.Contracts.Dto.Mapping;
 using MovieWebApi.Extensions;
 using NLog;
@@ -19,6 +20,8 @@ builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureLoggerServices();
 builder.Services.ConfigureDatabaseContext(builder.Configuration);
+builder.Services.AddAuthentication();
+builder.Services.ConfigureIdentity();
 
 //ServiceExtensions.ConfigureDatabaseContext(builder.Services, builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
@@ -27,6 +30,8 @@ builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 
 var app = builder.Build();
+//var logger = app.Services.GetRequiredService<ILoggerManager>();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -40,12 +45,15 @@ else
     app.UseHsts();
 }
 
+//app.ConfigureExceptionHandler(logger);
+
 app.UseHttpsRedirection();
 
 app.UseCors("CorsPolicy");
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 //app.MapControllers();
