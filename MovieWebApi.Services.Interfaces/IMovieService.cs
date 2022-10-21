@@ -1,5 +1,4 @@
 ﻿using MovieWebApi.Contracts.Dto;
-using MovieWebApi.Domain.Core.Entities;
 using MovieWebApi.Domain.Interfaces.RequestFeatures;
 
 namespace MovieWebApi.Services.Interfaces

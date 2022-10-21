@@ -7,6 +7,7 @@ namespace MovieWebApi.Infrastructure.Data.Repositories
     {
         private readonly RepositoryContext _repositoryContext;
         private IMovieRepository _movieRepository;
+        private IStarringRepository _starringRepository;
 
         public IMovieRepository Movie
         {
@@ -17,6 +18,17 @@ namespace MovieWebApi.Infrastructure.Data.Repositories
                 return _movieRepository;
             }
         }
+
+        public IStarringRepository Starring
+        {
+            get
+            {
+                if (_starringRepository is null)
+                    _starringRepository = new StarringRepository(_repositoryContext);
+                return _starringRepository;
+            }
+        }
+
         public RepositoryManager(RepositoryContext repositoryContext)
         {
             _repositoryContext = repositoryContext;

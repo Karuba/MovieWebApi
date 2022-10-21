@@ -1,9 +1,10 @@
 using MovieWebApi.Contracts.Dto.Mapping;
 using MovieWebApi.Extensions;
-using System.Configuration;
+using NLog;
 using System.Reflection.Metadata;
 
 var builder = WebApplication.CreateBuilder(args);
+LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 // Add services to the container.
 
@@ -16,6 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureServiceManager();
+builder.Services.ConfigureLoggerServices();
 builder.Services.ConfigureDatabaseContext(builder.Configuration);
 
 //ServiceExtensions.ConfigureDatabaseContext(builder.Services, builder.Configuration);

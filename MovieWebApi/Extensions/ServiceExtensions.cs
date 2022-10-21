@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LoggerService;
+using Microsoft.EntityFrameworkCore;
 using MovieWebApi.Domain.Interfaces.Repositories;
 using MovieWebApi.Infrastructure.Business;
 using MovieWebApi.Infrastructure.Data;
@@ -33,6 +34,8 @@ namespace MovieWebApi.Extensions
             ConnectionExtension.ConfigureDatabaseContext(services, configuration);
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
             services.AddScoped<IRepositoryManager, RepositoryManager>();
+        public static void ConfigureLoggerServices(this IServiceCollection services) =>
+            services.AddScoped<ILoggerManager, LoggerManager>();
         //public static void ConfigureExceptionHandlerMiddleware(this IServiceCollection services) =>
         //    services.AddTransient<ExceptionHandlingMiddleware>();
     }

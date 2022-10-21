@@ -48,9 +48,7 @@ namespace MovieWebApi.Infrastructure.Business.Services
 
         public async Task<IEnumerable<MovieDto>> GetMoviesAsync(MovieParameters movieParameters)
         {
-            var movies = (await _repository.Movie.GetMoviesAsync(movieParameters));
-            
-            var moviesDto = _mapper.Map<IEnumerable<MovieDto>>(movies);
+            var moviesDto = _mapper.Map<IEnumerable<MovieDto>>(await _repository.Movie.GetMoviesAsync(movieParameters));
             return moviesDto;
         }
 
