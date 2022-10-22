@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieWebApi.Contracts.Dto;
 using MovieWebApi.Domain.Interfaces.RequestFeatures;
@@ -8,12 +9,13 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
 {
     [ApiController]
     [Route("api/movie")]
+    [ApiExplorerSettings(GroupName = "v1")]
     public class MovieController : ControllerBase
     {
         private readonly IServiceManager _serviceManager;
         public MovieController(IServiceManager service) => _serviceManager = service;
 
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "User")]
         public async Task<IActionResult> GetMoviesAsync([FromQuery]MovieParameters parameters)
         {
             var moviesDto = await _serviceManager.movieService.GetMoviesAsync(parameters);

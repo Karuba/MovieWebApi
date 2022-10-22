@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MovieWebApi.Contracts.Dto;
 using MovieWebApi.Domain.Core.Entities;
+using MovieWebApi.Services.Interfaces.Authentication;
 
 namespace MovieWebApi.Presentation.Controllers.Controllers
 {
@@ -16,12 +17,14 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
+        private readonly IAuthenticationManager _authManager;
 
-        public AuthenticationController(ILoggerManager logger, IMapper mapper, UserManager<User> userManager)
+        public AuthenticationController(ILoggerManager logger, IMapper mapper, UserManager<User> userManager, IAuthenticationManager authManager)
         {
             _logger = logger;
             _mapper = mapper;
             _userManager = userManager;
+            _authManager = authManager;
         }
         [HttpPost]
         public async Task<IActionResult> RegisterUser([FromBody] UserRegistrationDto userRegistration)
@@ -38,6 +41,17 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
             }
             await _userManager.AddToRolesAsync(user, userRegistration.Roles);
             return StatusCode(201);
+        }
+        [HttpPost("login")]
+        public async Task<IActionResult> Authenticate([FromBody] UserAuthenticationDto user)
+        {
+            if (!await _authManager.ValidateUser(user))
+            {
+                string warn = $"{nameof(Authenticate)}: Authentication failed. Wrong user name or password.";
+                _logger.LogWarn(warn);
+                return Unauthorized(warn);
+            }
+            return Ok(new { Token = await _authManager.CreateToken() });
         }
     }
 }
