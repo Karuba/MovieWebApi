@@ -5,11 +5,11 @@ namespace MovieWebApi.Domain.Core.Entities
 {
     public class MovieStarring
     {
-        //[ForeignKey(nameof(Movie))]
+        [ForeignKey(nameof(Movie))]
         public Guid MovieId { get; set; }
         public Movie Movie { get; set; }
 
-        //[ForeignKey(nameof(Starring))]
+        [ForeignKey(nameof(Starring))]
         public Guid StarringId { get; set; }
         public Starring Starring { get; set; }
     }
