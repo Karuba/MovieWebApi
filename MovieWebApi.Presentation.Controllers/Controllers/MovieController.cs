@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MovieWebApi.Contracts.Dto;
 using MovieWebApi.Domain.Interfaces.RequestFeatures;
@@ -13,7 +14,13 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
     public class MovieController : ControllerBase
     {
         private readonly IServiceManager _serviceManager;
-        public MovieController(IServiceManager service) => _serviceManager = service;
+        private readonly IHttpContextAccessor _httpContext;
+
+        public MovieController(IServiceManager service, IHttpContextAccessor httpContext)
+        {
+            _serviceManager = service;
+           _httpContext = httpContext;
+        }
 
         [HttpGet, Authorize(Roles = "User")]
         public async Task<IActionResult> GetMoviesAsync([FromQuery]MovieParameters parameters)
@@ -44,6 +51,12 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
         {
             var movieDto = await _serviceManager.movieService.UpdateMovieAsync(id, movieUpdate);
             return Ok(movieDto); // CreatedAtRoute("Movie", new { id = movieDto.Id }, movieDto);
+        }
+        [HttpPost("{id}"), Authorize]
+        public async Task<IActionResult> UpdateMovieRatingAsync(Guid id, [FromBody] UserRatingUpdateDto userRatingUpdate)
+        {
+            var movieDto = await _serviceManager.movieService.UpdateMovieRatingAsync(id, userRatingUpdate);
+            return Ok(movieDto);
         }
     }
 }

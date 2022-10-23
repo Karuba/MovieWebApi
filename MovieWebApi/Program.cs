@@ -52,7 +52,7 @@ builder.Services.AddAuthentication();
 builder.Services.ConfigureIdentity();
 builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.AddScoped<IAuthenticationManager, AuthenticationManager>();
-
+builder.Services.AddHttpContextAccessor();
 
 //ServiceExtensions.ConfigureDatabaseContext(builder.Services, builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
