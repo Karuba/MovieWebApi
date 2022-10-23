@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieWebApi.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using MovieWebApi.Infrastructure.Data;
 namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20221023130421_AddUserModelId")]
+    partial class AddUserModelId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,15 +53,15 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a0f5e084-6e44-4fad-96a3-5b2ddece72d8",
-                            ConcurrencyStamp = "a033f8c6-461d-44de-b396-38656f4f4c79",
+                            Id = "76107245-5942-4342-8aa9-d8f0b3a74d3b",
+                            ConcurrencyStamp = "c159fe4b-f28a-48d2-adb2-253c36a0da8e",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "1fea0be6-3498-4abc-93c1-ec558898a0e8",
-                            ConcurrencyStamp = "1a24df5b-1e6f-4d16-9598-33b6b1995cb3",
+                            Id = "975bf1d3-468c-4011-9766-8157854f8920",
+                            ConcurrencyStamp = "8e03d53e-715d-445a-a899-0b72a375683d",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

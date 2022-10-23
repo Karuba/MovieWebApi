@@ -28,6 +28,9 @@ namespace MovieWebApi.Infrastructure.Business.Authentication
             _user = await _userManager.FindByNameAsync(userForAuth.UserName);
             return (_user != null && await _userManager.CheckPasswordAsync(_user, userForAuth.Password));
         }
+        public async Task<User> GetUserAsync(string userName) => 
+            await _userManager.FindByNameAsync(userName);
+
         public async Task<string> CreateToken()
         {
             var signingCredentials = GetSigningCredentials();

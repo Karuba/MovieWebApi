@@ -10,5 +10,6 @@ namespace MovieWebApi.Services.Interfaces
         Task<MovieDto> UpdateMovieAsync(Guid id, MovieUpdateDto movie);
         Task DeleteMovie(Guid id);
         Task<MovieDto> CreateMovie(MovieCreateDto movie);
+        Task<MovieDto> UpdateMovieRatingAsync(Guid id, UserRatingUpdateDto userRatingUpdate);
     }
 }
