@@ -9,6 +9,7 @@ namespace MovieWebApi.Infrastructure.Data.Repositories
         private IMovieRepository _movieRepository;
         private IStarringRepository _starringRepository;
         private IUserRatingRepository _userRatingRepository;
+        private IMovieStarringRepository _movieStarringRepository;
 
         public IMovieRepository Movie
         {
@@ -37,6 +38,16 @@ namespace MovieWebApi.Infrastructure.Data.Repositories
                 if (_userRatingRepository is null)
                     _userRatingRepository = new UserRatingRepository(_repositoryContext);
                 return _userRatingRepository;
+            }
+        }
+
+        public IMovieStarringRepository movieStarring
+        {
+            get
+            {
+                if (_movieStarringRepository is null)
+                    _movieStarringRepository = new MovieStarringRepository(_repositoryContext);
+                return _movieStarringRepository;
             }
         }
 

@@ -105,5 +105,57 @@ namespace MovieWebApi.Infrastructure.Business.Services
 
             return _mapper.Map<MovieDto>(movie);
         }
+
+        public async Task<MovieDto> AddMovieStarringAsync(Guid id, Guid starringId)
+        {
+            var starring = await _repository.Starring.GetStarringAsync(starringId);
+            if (starring is null)
+                throw new NotFoundException($"Starring with id: {id} doesn't exist in the database");
+
+            var movie = await _repository.Movie.GetMovieAsync(id);
+            if (movie is null)
+                throw new NotFoundException($"Movie with id: {id} doesn't exist in the database");
+
+            var movieStarring = await _repository.movieStarring.GetMovieStarring(new MovieStarring
+            {
+                MovieId = id,
+                StarringId = starringId,
+            });
+
+            if (movieStarring is null)
+            {
+                _repository.movieStarring.AddMovieStarring(new MovieStarring
+                {
+                    MovieId = id,
+                    StarringId = starringId,
+                });
+            }
+
+            await _repository.SaveAsync();
+
+            return await GetMovieAsync(id);
+        }
+        public async Task DeleteMovieStarringAsync(Guid id, Guid starringId)
+        {
+            var movieStarring = await _repository.movieStarring.GetMovieStarring(new MovieStarring
+            {
+                MovieId = id,
+                StarringId = starringId,
+            });
+
+            if (movieStarring is null)
+                throw new NotFoundException($"MovieStarring with id: {id} doesn't exist in the database");
+
+            _repository.movieStarring.DeleteMovieSstarring(movieStarring);
+            await _repository.SaveAsync();
+
+            movieStarring = await _repository.movieStarring.GetMovieStarring(starringId);
+
+            if (movieStarring is null)
+            {
+                var starring = await _repository.Starring.GetStarringAsync(starringId);
+                _repository.Starring.DeleteStarring(starring);
+            }
+        }
     }
 }

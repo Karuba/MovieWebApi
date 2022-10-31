@@ -28,19 +28,11 @@ namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
                 .Take(starringParameters.PageSize)
                 .ToListAsync();
 
-        public void AddStarring(Guid movieId, Starring starring) 
-        {
-            Create(starring);
-            _repositoryContext.Set<MovieStarring>().Add(new MovieStarring
-            {
-                MovieId = movieId,
-                StarringId = starring.Id,
-            });
-        }
+        public void AddStarring(Starring starring) => Create(starring);
 
-        public void UpdateStarring(Guid movieId, Starring starring) => Update(starring);
+        public void UpdateStarring(Starring starring) => Update(starring);
 
-        public void DeleteStarring(Guid movieId, Starring starring) => Delete(starring);
+        public void DeleteStarring(Starring starring) => Delete(starring);
 
     }
 }

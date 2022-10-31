@@ -19,11 +19,11 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
         public MovieController(IServiceManager service, IHttpContextAccessor httpContext)
         {
             _serviceManager = service;
-           _httpContext = httpContext;
+            _httpContext = httpContext;
         }
 
-        [HttpGet, Authorize(Roles = "User")]
-        public async Task<IActionResult> GetMoviesAsync([FromQuery]MovieParameters parameters)
+        [HttpGet]
+        public async Task<IActionResult> GetMoviesAsync([FromQuery] MovieParameters parameters)
         {
             var moviesDto = await _serviceManager.movieService.GetMoviesAsync(parameters);
             return Ok(moviesDto);
@@ -41,7 +41,7 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
             return Ok(movieDto); //CreatedAtRoute("Movie", new {id = movieDto.Id}, movieDto);
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMovieasync(Guid id)
+        public async Task<IActionResult> DeleteMovieAsync(Guid id)
         {
             await _serviceManager.movieService.DeleteMovie(id);
             return NoContent();
@@ -57,6 +57,18 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
         {
             var movieDto = await _serviceManager.movieService.UpdateMovieRatingAsync(id, userRatingUpdate);
             return Ok(movieDto);
+        }
+        [HttpPost("{id}/{starringId}")]
+        public async Task<IActionResult> AddMovieStarringAsync(Guid id, Guid starringId)
+        {
+            var movieDto = await _serviceManager.movieService.AddMovieStarringAsync(id, starringId);
+            return Ok(movieDto);
+        }
+        [HttpDelete("{id}/{starringId}")]
+        public async Task<IActionResult> DeleteMovieStarringAsync(Guid id, Guid starringId)
+        {
+            await _serviceManager.movieService.DeleteMovieStarringAsync(id, starringId);
+            return NoContent();
         }
     }
 }

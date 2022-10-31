@@ -31,6 +31,11 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
             var starringDto = await _serviceManager.starringService.UpdateStarringAsync(id, starringUpdateDto);
             return Ok(starringDto); // CreatedAtRoute("Movie", new { id = movieDto.Id }, movieDto);
         }
-
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteStarringAsync(Guid id)
+        {
+            await _serviceManager.starringService.DeleteStarring(id);
+            return NoContent();
+        }
     }
 }

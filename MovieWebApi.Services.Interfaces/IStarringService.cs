@@ -8,7 +8,7 @@ namespace MovieWebApi.Services.Interfaces
         Task<IEnumerable<StarringDto>> GetStarringsAsync(Guid movieId, StarringParameters starringParameters);
         Task<StarringDto> GetStarringAsync(Guid movieId, Guid id);
         Task<StarringDto> UpdateStarringAsync(Guid id, StarringUpdateDto starringUpdateDto);
-        Task DeleteStarring(Guid movieId, Guid id);
+        Task DeleteStarring(Guid id);
         Task<StarringDto> CreateStarring(Guid movieId, StarringCreateDto striringCreateDto);
     }
 }

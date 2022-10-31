@@ -21,7 +21,13 @@ namespace MovieWebApi.Infrastructure.Business.Services
         public async Task<StarringDto> CreateStarring(Guid movieId, StarringCreateDto starringCreateDto)
         {
             var starring = _mapper.Map<Starring>(starringCreateDto);
-            _repository.Starring.AddStarring(movieId, starring);
+            _repository.Starring.AddStarring(starring);
+            _repository.movieStarring.AddMovieStarring(new MovieStarring
+            {
+                MovieId = movieId,
+                StarringId = starring.Id,
+                Starring = starring
+            });
             await _repository.SaveAsync();
 
             var movieToReturn = _mapper.Map<StarringDto>(starring);
@@ -29,9 +35,14 @@ namespace MovieWebApi.Infrastructure.Business.Services
             return movieToReturn;
         }
 
-        public Task DeleteStarring(Guid movieId, Guid id)
+        public async Task DeleteStarring(Guid id)
         {
-            throw new NotImplementedException();
+            var starring = await _repository.Starring.GetStarringAsync(id);
+            if (starring is null)
+                throw new NotFoundException($"Starring with id: {id} doesn't exist in the database");
+
+            _repository.Starring.DeleteStarring(starring);
+            await _repository.SaveAsync();
         }
 
         public Task<StarringDto> GetStarringAsync(Guid movieId, Guid id)
