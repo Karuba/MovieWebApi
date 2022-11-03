@@ -16,14 +16,14 @@ namespace MovieWebApi.Infrastructure.Data.Configurations
             builder.HasData(
                 new Starring
                 {
-                    Id = new Guid("11abbca8-664d-4b20-b5de-024705497d4a"),
+                    Id = "11abbca8-664d-4b20-b5de-024705497d4a",
                     FirstName = "John",
                     SecondName = "Travolta",
                     Description = "One of the main character"
                 },
                 new Starring
                 {
-                    Id = new Guid("12abbca8-664d-4b20-b5de-024705497d4a"),
+                    Id = "12abbca8-664d-4b20-b5de-024705497d4a",
                     FirstName = "Samuel L.",
                     SecondName = "Jackson",
                     Description = "One of the main character"

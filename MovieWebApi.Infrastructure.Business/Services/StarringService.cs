@@ -24,7 +24,7 @@ namespace MovieWebApi.Infrastructure.Business.Services
             _repository.Starring.AddStarring(starring);
             _repository.movieStarring.AddMovieStarring(new MovieStarring
             {
-                MovieId = movieId,
+                MovieId = movieId.ToString(),
                 StarringId = starring.Id,
                 Starring = starring
             });
@@ -37,7 +37,7 @@ namespace MovieWebApi.Infrastructure.Business.Services
 
         public async Task DeleteStarring(Guid id)
         {
-            var starring = await _repository.Starring.GetStarringAsync(id);
+            var starring = await _repository.Starring.GetStarringAsync(id.ToString());
             if (starring is null)
                 throw new NotFoundException($"Starring with id: {id} doesn't exist in the database");
 
@@ -53,7 +53,7 @@ namespace MovieWebApi.Infrastructure.Business.Services
         public async Task<IEnumerable<StarringDto>> GetStarringsAsync(Guid movieId, StarringParameters starringParameters)
         {
 
-            var starringsDto = _mapper.Map<IEnumerable<StarringDto>>(await _repository.Starring.GetStarringsAsync(movieId, starringParameters));
+            var starringsDto = _mapper.Map<IEnumerable<StarringDto>>(await _repository.Starring.GetStarringsAsync(movieId.ToString(), starringParameters));
             return starringsDto;
         }
 
@@ -62,7 +62,7 @@ namespace MovieWebApi.Infrastructure.Business.Services
             if (starringUpdateDto is null)
                 throw new BadRequestException($"StarringUpdateDto is null");
 
-            var starring = await _repository.Starring.GetStarringAsync(id, trackChanges: true);
+            var starring = await _repository.Starring.GetStarringAsync(id.ToString(), trackChanges: true);
             if (starring is null)
                 throw new NotFoundException($"Starring with id: {id} doesn't exist in the database");
 

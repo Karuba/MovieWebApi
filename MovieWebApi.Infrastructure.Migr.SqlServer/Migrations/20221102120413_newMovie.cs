@@ -4,29 +4,34 @@
 
 namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 {
-    public partial class UpdateUserModel : Migration
+    public partial class newMovie : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "76107245-5942-4342-8aa9-d8f0b3a74d3b");
+                keyValue: "1f10da33-85ff-48bc-9a71-4e88c0978882");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "975bf1d3-468c-4011-9766-8157854f8920");
+                keyValue: "9144b8fa-cd9c-43d8-8c47-e818eb5df3c5");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1fea0be6-3498-4abc-93c1-ec558898a0e8", "1a24df5b-1e6f-4d16-9598-33b6b1995cb3", "Administrator", "ADMINISTRATOR" });
+                values: new object[] { "78b9fd87-f07f-4b57-90ac-9e8a08fbc1d5", "bc2bed6f-17a3-424e-b3c7-bd223ae51368", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "a0f5e084-6e44-4fad-96a3-5b2ddece72d8", "a033f8c6-461d-44de-b396-38656f4f4c79", "User", "USER" });
+                values: new object[] { "dff4a0e6-6fab-4499-8684-95b2e09e1aeb", "7968db5b-020b-4d1d-a6cd-3629c239b11d", "Administrator", "ADMINISTRATOR" });
+
+            migrationBuilder.InsertData(
+                table: "Movie",
+                columns: new[] { "MovieId", "Description", "Name", "Rating" },
+                values: new object[] { "8e6e716c-a47c-4fac-9765-08dabb42e809", "Two goons mistake 'the Dude' Lebowski for a millionaire Lebowski and urinate on his rug.", "The Big Lebowski", 5.0 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -34,22 +39,27 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "1fea0be6-3498-4abc-93c1-ec558898a0e8");
+                keyValue: "78b9fd87-f07f-4b57-90ac-9e8a08fbc1d5");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "a0f5e084-6e44-4fad-96a3-5b2ddece72d8");
+                keyValue: "dff4a0e6-6fab-4499-8684-95b2e09e1aeb");
+
+            migrationBuilder.DeleteData(
+                table: "Movie",
+                keyColumn: "MovieId",
+                keyValue: "8e6e716c-a47c-4fac-9765-08dabb42e809");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "76107245-5942-4342-8aa9-d8f0b3a74d3b", "c159fe4b-f28a-48d2-adb2-253c36a0da8e", "User", "USER" });
+                values: new object[] { "1f10da33-85ff-48bc-9a71-4e88c0978882", "b7b13648-9f80-4cc7-b796-2c7344f8f3dd", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "975bf1d3-468c-4011-9766-8157854f8920", "8e03d53e-715d-445a-a899-0b72a375683d", "Administrator", "ADMINISTRATOR" });
+                values: new object[] { "9144b8fa-cd9c-43d8-8c47-e818eb5df3c5", "420d3dd7-c2b1-4e68-a03f-c12c365a6bf2", "Administrator", "ADMINISTRATOR" });
         }
     }
 }

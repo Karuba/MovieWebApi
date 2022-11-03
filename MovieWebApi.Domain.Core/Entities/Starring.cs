@@ -7,7 +7,8 @@ namespace MovieWebApi.Domain.Core.Entities
     public class Starring
     {
         [Column("StarringId")]
-        public Guid Id { get; set; }
+        [Key]
+        public string Id { get; set; }
         [Required(ErrorMessage = "The FirstName is required field for starring")]
         [MinLength(1, ErrorMessage = "The FirstName must contain at least 1 character"), MaxLength(80, ErrorMessage = "The FirstName mustn't exceed 80 characters")]
         public string FirstName { get; set; }

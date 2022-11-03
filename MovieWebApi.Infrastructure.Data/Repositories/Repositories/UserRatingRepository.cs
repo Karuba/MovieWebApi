@@ -14,13 +14,13 @@ namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
 
         public void AddUserRating(UserRating userRating) => Create(userRating);
 
-        public async Task<double> GetMovieRating(Guid movieId, bool trackChanges = false)
+        public async Task<double> GetMovieRating(string movieId, bool trackChanges = false)
         {
             var userRating = await FindByCondition(ur => ur.MovieId.Equals(movieId), trackChanges).Select(s => s.Rating).ToListAsync();
             return userRating.Sum()/(double)userRating.Count;
         }
 
-        public async Task<UserRating> GetUserRating(string userId, Guid movieId, bool trackChanges = false) =>
+        public async Task<UserRating> GetUserRating(string userId, string movieId, bool trackChanges = false) =>
             await FindByCondition(us => us.UserId.Equals(userId) && us.MovieId.Equals(movieId), trackChanges).FirstOrDefaultAsync();
     }
 }

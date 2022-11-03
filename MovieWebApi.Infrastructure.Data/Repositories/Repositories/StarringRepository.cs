@@ -15,10 +15,10 @@ namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
             _repositoryContext = repositoryContext;
         }
 
-        public async Task<Starring> GetStarringAsync(Guid id, bool trackChanges = false) =>
+        public async Task<Starring> GetStarringAsync(string id, bool trackChanges = false) =>
             await FindByCondition(opt => opt.Id.Equals(id), trackChanges).FirstOrDefaultAsync();
 
-        public async Task<IEnumerable<Starring>> GetStarringsAsync(Guid movieId, StarringParameters starringParameters, bool trackChanges = false) =>
+        public async Task<IEnumerable<Starring>> GetStarringsAsync(string movieId, StarringParameters starringParameters, bool trackChanges = false) =>
             await _repositoryContext.Set<MovieStarring>()
                 .Where(ms => ms.MovieId.Equals(movieId))
                 .Include(ms => ms.Starring)

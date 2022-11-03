@@ -2,6 +2,7 @@ using Microsoft.OpenApi.Models;
 using MovieWebApi.Contracts.Dto.Mapping;
 using MovieWebApi.Extensions;
 using MovieWebApi.Infrastructure.Business.Authentication;
+using MovieWebApi.MLModels.DataModels;
 using MovieWebApi.Services.Interfaces.Authentication;
 using NLog;
 using System.Reflection.Metadata;
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 // Add services to the container.
+
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(AssemblyReference).Assembly);

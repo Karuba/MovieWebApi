@@ -13,7 +13,7 @@ namespace MovieWebApi.Contracts.Dto.Mapping
                 Description = x.Description,
                 FirstName = x.FirstName,
                 SecondName = x.SecondName,
-                Id = x.Id,
+                Id = Guid.Parse(x.Id),
             })));
             CreateMap<Movie, MovieCreateDto>().ReverseMap();
             CreateMap<Movie, MovieUpdateDto>().ReverseMap();

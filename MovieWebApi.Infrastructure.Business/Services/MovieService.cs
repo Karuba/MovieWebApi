@@ -36,7 +36,7 @@ namespace MovieWebApi.Infrastructure.Business.Services
 
         public async Task DeleteMovie(Guid id)
         {
-            var movie = await _repository.Movie.GetMovieAsync(id);
+            var movie = await _repository.Movie.GetMovieAsync(id.ToString());
             if (movie is null)
                 throw new NotFoundException($"Movie with id: {id} doesn't exist in the database");
 
@@ -46,7 +46,7 @@ namespace MovieWebApi.Infrastructure.Business.Services
 
         public async Task<MovieDto> GetMovieAsync(Guid id)
         {
-            var movieDto = _mapper.Map<MovieDto>(await _repository.Movie.GetMovieAsync(id));
+            var movieDto = _mapper.Map<MovieDto>(await _repository.Movie.GetMovieAsync(id.ToString()));
             return movieDto;
         }
 
@@ -61,7 +61,7 @@ namespace MovieWebApi.Infrastructure.Business.Services
             if (movieData is null)
                 throw new BadRequestException($"MovieUpdateDto is null");
 
-            var movie = await _repository.Movie.GetMovieAsync(id, trackChanges: true);
+            var movie = await _repository.Movie.GetMovieAsync(id.ToString(), trackChanges: true);
             if (movie is null)
                 throw new NotFoundException($"Movie with id: {id} doesn't exist in the database");
             
@@ -77,17 +77,17 @@ namespace MovieWebApi.Infrastructure.Business.Services
             if (user is null)
                 throw new NotFoundException($"The User is not registered");
 
-            var movie = await _repository.Movie.GetMovieAsync(id, trackChanges: true);
+            var movie = await _repository.Movie.GetMovieAsync(id.ToString(), trackChanges: true);
             if (movie is null)
                 throw new NotFoundException($"Movie with id: {id} doesn't exist in the database");
 
-            var userRating = await _repository.UserRating.GetUserRating(user.Id, id, trackChanges: true);
+            var userRating = await _repository.UserRating.GetUserRating(user.Id, id.ToString(), trackChanges: true);
 
             if (userRating is null)
             {
                 userRating = _mapper.Map<UserRating>(userRatingUpdate);
                 userRating.UserId = user.Id;
-                userRating.MovieId = id;
+                userRating.MovieId = id.ToString();
                 _repository.UserRating.AddUserRating(userRating);
             }
             else
@@ -97,7 +97,7 @@ namespace MovieWebApi.Infrastructure.Business.Services
 
             await _repository.SaveAsync();
 
-            var rating = await _repository.UserRating.GetMovieRating(id);
+            var rating = await _repository.UserRating.GetMovieRating(id.ToString());
 
             movie.Rating = rating;
 
@@ -108,26 +108,26 @@ namespace MovieWebApi.Infrastructure.Business.Services
 
         public async Task<MovieDto> AddMovieStarringAsync(Guid id, Guid starringId)
         {
-            var starring = await _repository.Starring.GetStarringAsync(starringId);
+            var starring = await _repository.Starring.GetStarringAsync(starringId.ToString());
             if (starring is null)
                 throw new NotFoundException($"Starring with id: {id} doesn't exist in the database");
 
-            var movie = await _repository.Movie.GetMovieAsync(id);
+            var movie = await _repository.Movie.GetMovieAsync(id.ToString());
             if (movie is null)
                 throw new NotFoundException($"Movie with id: {id} doesn't exist in the database");
 
             var movieStarring = await _repository.movieStarring.GetMovieStarring(new MovieStarring
             {
-                MovieId = id,
-                StarringId = starringId,
+                MovieId = id.ToString(),
+                StarringId = starringId.ToString(),
             });
 
             if (movieStarring is null)
             {
                 _repository.movieStarring.AddMovieStarring(new MovieStarring
                 {
-                    MovieId = id,
-                    StarringId = starringId,
+                    MovieId = id.ToString(),
+                    StarringId = starringId.ToString(),
                 });
             }
 
@@ -139,8 +139,8 @@ namespace MovieWebApi.Infrastructure.Business.Services
         {
             var movieStarring = await _repository.movieStarring.GetMovieStarring(new MovieStarring
             {
-                MovieId = id,
-                StarringId = starringId,
+                MovieId = id.ToString(),
+                StarringId = starringId.ToString(),
             });
 
             if (movieStarring is null)
@@ -149,11 +149,11 @@ namespace MovieWebApi.Infrastructure.Business.Services
             _repository.movieStarring.DeleteMovieSstarring(movieStarring);
             await _repository.SaveAsync();
 
-            movieStarring = await _repository.movieStarring.GetMovieStarring(starringId);
+            movieStarring = await _repository.movieStarring.GetMovieStarring(starringId.ToString());
 
             if (movieStarring is null)
             {
-                var starring = await _repository.Starring.GetStarringAsync(starringId);
+                var starring = await _repository.Starring.GetStarringAsync(starringId.ToString());
                 _repository.Starring.DeleteStarring(starring);
             }
         }

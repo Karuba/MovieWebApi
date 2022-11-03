@@ -12,8 +12,8 @@ using MovieWebApi.Infrastructure.Data;
 namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20221022105249_AddUsingRating")]
-    partial class AddUsingRating
+    [Migration("20221102110632_create")]
+    partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,15 +53,15 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c136f86d-b44c-43a2-91e7-51c9af8f5684",
-                            ConcurrencyStamp = "e2cde7c8-41ef-4043-91e6-0317fc274ba3",
+                            Id = "1f10da33-85ff-48bc-9a71-4e88c0978882",
+                            ConcurrencyStamp = "b7b13648-9f80-4cc7-b796-2c7344f8f3dd",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "1fde162f-6866-4d94-8727-06f32c0908ae",
-                            ConcurrencyStamp = "6342dab7-30e3-41ef-9f73-810d4d217762",
+                            Id = "9144b8fa-cd9c-43d8-8c47-e818eb5df3c5",
+                            ConcurrencyStamp = "420d3dd7-c2b1-4e68-a03f-c12c365a6bf2",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -175,9 +175,8 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 
             modelBuilder.Entity("MovieWebApi.Domain.Core.Entities.Movie", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("MovieId");
 
                     b.Property<string>("Description")
@@ -199,13 +198,13 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("01abbca8-664d-4b20-b5de-024705497d4a"),
+                            Id = "01abbca8-664d-4b20-b5de-024705497d4a",
                             Description = "This is film was made by Quentin Tarantino",
                             Name = "Pulp Fiction"
                         },
                         new
                         {
-                            Id = new Guid("02abbca8-664d-4b20-b5de-024705497d4a"),
+                            Id = "02abbca8-664d-4b20-b5de-024705497d4a",
                             Description = "This is film was made by Guy Ritchie",
                             Name = "Snatch",
                             Rating = 3.0
@@ -214,11 +213,11 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 
             modelBuilder.Entity("MovieWebApi.Domain.Core.Entities.MovieStarring", b =>
                 {
-                    b.Property<Guid>("MovieId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("MovieId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("StarringId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("StarringId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("MovieId", "StarringId");
 
@@ -229,31 +228,20 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
                     b.HasData(
                         new
                         {
-                            MovieId = new Guid("01abbca8-664d-4b20-b5de-024705497d4a"),
-                            StarringId = new Guid("11abbca8-664d-4b20-b5de-024705497d4a")
+                            MovieId = "01abbca8-664d-4b20-b5de-024705497d4a",
+                            StarringId = "11abbca8-664d-4b20-b5de-024705497d4a"
                         },
                         new
                         {
-                            MovieId = new Guid("02abbca8-664d-4b20-b5de-024705497d4a"),
-                            StarringId = new Guid("12abbca8-664d-4b20-b5de-024705497d4a")
-                        },
-                        new
-                        {
-                            MovieId = new Guid("02abbca8-664d-4b20-b5de-024705497d4a"),
-                            StarringId = new Guid("11abbca8-664d-4b20-b5de-024705497d4a")
-                        },
-                        new
-                        {
-                            MovieId = new Guid("01abbca8-664d-4b20-b5de-024705497d4a"),
-                            StarringId = new Guid("12abbca8-664d-4b20-b5de-024705497d4a")
+                            MovieId = "02abbca8-664d-4b20-b5de-024705497d4a",
+                            StarringId = "12abbca8-664d-4b20-b5de-024705497d4a"
                         });
                 });
 
             modelBuilder.Entity("MovieWebApi.Domain.Core.Entities.Starring", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("StarringId");
 
                     b.Property<string>("Description")
@@ -277,14 +265,14 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("11abbca8-664d-4b20-b5de-024705497d4a"),
+                            Id = "11abbca8-664d-4b20-b5de-024705497d4a",
                             Description = "One of the main character",
                             FirstName = "John",
                             SecondName = "Travolta"
                         },
                         new
                         {
-                            Id = new Guid("12abbca8-664d-4b20-b5de-024705497d4a"),
+                            Id = "12abbca8-664d-4b20-b5de-024705497d4a",
                             Description = "One of the main character",
                             FirstName = "Samuel L.",
                             SecondName = "Jackson"
@@ -366,8 +354,8 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 
             modelBuilder.Entity("MovieWebApi.Domain.Core.Entities.UserRating", b =>
                 {
-                    b.Property<Guid>("MovieId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("MovieId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");

@@ -9,7 +9,8 @@ namespace MovieWebApi.Domain.Core.Entities
     public class Movie
     {
         [Column("MovieId")]
-        public Guid Id { get; set; }
+        [Key]
+        public string Id { get; set; }
         [Required(ErrorMessage = "The Name is required field for movie")]
         [MinLength(1, ErrorMessage = "The Name must contain at least 1 character"), MaxLength(250, ErrorMessage = "The Name mustn't exceed 250 characters")]
         public string Name { get; set; }

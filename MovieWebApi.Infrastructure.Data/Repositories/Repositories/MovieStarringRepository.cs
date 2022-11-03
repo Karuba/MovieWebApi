@@ -18,7 +18,7 @@ namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
 
         public async Task<MovieStarring> GetMovieStarring(MovieStarring movieStarring, bool trackChanges = false) =>
             await FindByCondition(ms => ms.StarringId.Equals(movieStarring.StarringId) && ms.MovieId.Equals(movieStarring.MovieId), trackChanges).FirstOrDefaultAsync();
-        public async Task<MovieStarring> GetMovieStarring(Guid starringId, bool trackChanges = false) =>
+        public async Task<MovieStarring> GetMovieStarring(string starringId, bool trackChanges = false) =>
             await FindByCondition(ms => ms.StarringId.Equals(starringId), trackChanges).FirstOrDefaultAsync();
     }
 }

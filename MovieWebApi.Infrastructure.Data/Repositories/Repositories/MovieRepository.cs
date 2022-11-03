@@ -12,7 +12,7 @@ namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
         {
         }
 
-        public async Task<Movie> GetMovieAsync(Guid id, bool trackChanges = false) =>
+        public async Task<Movie> GetMovieAsync(string id, bool trackChanges = false) =>
             await FindByCondition(opt => opt.Id.Equals(id), trackChanges)
                 .Include(c => c.MovieStarrings)
                 .ThenInclude(c => c.Starring)
