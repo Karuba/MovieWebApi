@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieWebApi.Infrastructure.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "..\..\..\..\..\University-3-6\my_shit\C#\WebApi\CompanyEmpoyees\LoggerService\LoggerService.csproj", "{EEF061BF-E755-4308-A6E4-E7B3B3C8B874}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieWebApi.Infrastructure.ML", "MovieWebApi.Infrastructure.ML\MovieWebApi.Infrastructure.ML.csproj", "{F0AA83B2-F71E-4EB9-B7C5-28E6B3F33AAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLRModel", "..\..\ML\ML_recommendationFromDoc\MLRModel\MLRModel.csproj", "{56B40CD5-27F4-401A-9711-352F3E033FB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,10 +77,10 @@ Global
 		{EEF061BF-E755-4308-A6E4-E7B3B3C8B874}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEF061BF-E755-4308-A6E4-E7B3B3C8B874}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEF061BF-E755-4308-A6E4-E7B3B3C8B874}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F0AA83B2-F71E-4EB9-B7C5-28E6B3F33AAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F0AA83B2-F71E-4EB9-B7C5-28E6B3F33AAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F0AA83B2-F71E-4EB9-B7C5-28E6B3F33AAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F0AA83B2-F71E-4EB9-B7C5-28E6B3F33AAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56B40CD5-27F4-401A-9711-352F3E033FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56B40CD5-27F4-401A-9711-352F3E033FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56B40CD5-27F4-401A-9711-352F3E033FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56B40CD5-27F4-401A-9711-352F3E033FB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,7 +94,7 @@ Global
 		{722C63D9-8662-4FFD-B52B-434CB72C9B22} = {795049B9-C580-4A2C-B568-D665CD88AEDC}
 		{D8282D3E-C425-4732-B100-A7904768F323} = {268096ED-6D6A-4B24-B8AF-4D0F977DB2F3}
 		{37F77574-7F8B-4566-AA5F-F95948743CA6} = {795049B9-C580-4A2C-B568-D665CD88AEDC}
-		{F0AA83B2-F71E-4EB9-B7C5-28E6B3F33AAA} = {795049B9-C580-4A2C-B568-D665CD88AEDC}
+		{56B40CD5-27F4-401A-9711-352F3E033FB4} = {795049B9-C580-4A2C-B568-D665CD88AEDC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4D9ECEB8-9482-438C-94A9-92C448A5268E}

@@ -1,8 +1,9 @@
+using Microsoft.Extensions.ML;
 using Microsoft.OpenApi.Models;
+using MLRModel;
 using MovieWebApi.Contracts.Dto.Mapping;
 using MovieWebApi.Extensions;
 using MovieWebApi.Infrastructure.Business.Authentication;
-using MovieWebApi.MLModels.DataModels;
 using MovieWebApi.Services.Interfaces.Authentication;
 using NLog;
 using System.Reflection.Metadata;
@@ -10,7 +11,13 @@ using System.Reflection.Metadata;
 var builder = WebApplication.CreateBuilder(args);
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
+
+
 // Add services to the container.
+builder.Services.AddPredictionEnginePool<MLRecommendationModel.ModelInput, MLRecommendationModel.ModelOutput>()
+    .FromFile("C:\\WorkPlace\\University-4-7\\labs\\Kursovoi\\ML\\ML_recommendationFromDoc\\MLRModel\\MLRecommendationModel.zip");
+
+
 
 
 builder.Services.AddControllers()
