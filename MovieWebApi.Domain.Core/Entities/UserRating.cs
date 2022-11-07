@@ -14,6 +14,6 @@ namespace MovieWebApi.Domain.Core.Entities
 
         [Required]
         [Range(0,5)]
-        public int Rating { get; set; }
+        public float Rating { get; set; }
     }
 }

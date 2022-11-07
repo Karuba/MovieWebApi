@@ -25,8 +25,13 @@
     <ProjectReference Include="..\..\..\ML\ML_recommendationFromDoc\MLRModel\MLRModel.csproj" />
     <ProjectReference Include="..\MovieWebApi.Infrastructure.Business\MovieWebApi.Infrastructure.Business.csproj" />
     <ProjectReference Include="..\MovieWebApi.Infrastructure.Migr.SqlServer\MovieWebApi.Infrastructure.Migr.SqlServer.csproj" />
+    <ProjectReference Include="..\MovieWebApi.Infrastructure.ML\MovieWebApi.Infrastructure.ML.csproj" />
     <ProjectReference Include="..\MovieWebApi.Presentation.Controllers\MovieWebApi.Presentation.Controllers.csproj" />
     <ProjectReference Include="..\MovieWebApi.Services.Interfaces\MovieWebApi.Services.Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MLRModel\" />
   </ItemGroup>
 
 </Project>

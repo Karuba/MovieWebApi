@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\..\University-3-6\my_shit\C#\WebApi\CompanyEmpoyees\LoggerService\LoggerService.csproj" />
     <ProjectReference Include="..\..\..\ML\ML_recommendationFromDoc\MLRModel\MLRModel.csproj" />
+    <ProjectReference Include="..\MovieWebApi.Infrastructure.ML\MovieWebApi.Infrastructure.ML.csproj" />
     <ProjectReference Include="..\MovieWebApi.Services.Interfaces\MovieWebApi.Services.Interfaces.csproj" />
   </ItemGroup>
 

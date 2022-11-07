@@ -12,7 +12,7 @@ namespace MovieWebApi.Infrastructure.ML.DataModels
         public string MovieId { get; set; }
 
         [ColumnName(@"Rating")]
-        public float Rating { get; set; }
+        public Single Rating { get; set; }
     }
     public class ModelOutput
     {

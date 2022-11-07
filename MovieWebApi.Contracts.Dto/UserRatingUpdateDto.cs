@@ -7,7 +7,7 @@ namespace MovieWebApi.Contracts.Dto
     {
         [Required]
         [Range(0, 5, ErrorMessage = "The Rating must contain integer values in the range from 0 to 5 ")]
-        public int Rating { get; set; }
+        public float Rating { get; set; }
         [Required]
         public string UserId { get; set; }
     }

@@ -52,7 +52,7 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
             var movieDto = await _serviceManager.movieService.UpdateMovieAsync(id, movieUpdate);
             return Ok(movieDto); // CreatedAtRoute("Movie", new { id = movieDto.Id }, movieDto);
         }
-        [HttpPost("{id}"), Authorize]
+        [HttpPost("{id}")]
         public async Task<IActionResult> UpdateMovieRatingAsync(Guid id, [FromBody] UserRatingUpdateDto userRatingUpdate)
         {
             var movieDto = await _serviceManager.movieService.UpdateMovieRatingAsync(id, userRatingUpdate);
