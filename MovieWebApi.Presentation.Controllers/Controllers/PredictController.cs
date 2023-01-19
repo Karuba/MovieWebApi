@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.ML;
-using MLRModel;
 using MovieWebApi.Infrastructure.ML;
 using MovieWebApi.Infrastructure.ML.DataModels;
 
@@ -29,9 +28,7 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
 
             ModelOutput prediction = await Task.FromResult(_predictionEnginePool.Predict(input));
 
-            string sentiment = prediction.Score.ToString();
-
-            return Ok(sentiment);
+            return Ok(prediction.Score.ToString());
         }
         [HttpPut]
         public IActionResult PredicModelRebuild()

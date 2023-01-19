@@ -18,6 +18,8 @@ namespace MovieWebApi.Domain.Core.Entities
         public string? Description { get; set; }
         [Range(0,5, ErrorMessage = "The Rating must contain integer values in the range from 0 to 5 ")]
         public double? Rating { get; set; }
+        [MaxLength(500, ErrorMessage = "The ImagePath mustn't exceed 500 characters")]
+        public string? Image { get; set; }
         public ICollection<MovieStarring> MovieStarrings { get; set; } = new List<MovieStarring>();
         public ICollection<UserRating> UserRatings { get; set; }
     }

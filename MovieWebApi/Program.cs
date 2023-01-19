@@ -1,6 +1,5 @@
 using Microsoft.Extensions.ML;
 using Microsoft.OpenApi.Models;
-using MLRModel;
 using MovieWebApi.Contracts.Dto.Mapping;
 using MovieWebApi.Extensions;
 using MovieWebApi.Infrastructure.Business.Authentication;
@@ -66,7 +65,6 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 //builder.Services.ConfigureExceptionHandlerMiddleware();
-
 
 var app = builder.Build();
 //var logger = app.Services.GetRequiredService<ILoggerManager>();

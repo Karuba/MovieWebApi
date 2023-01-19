@@ -26,8 +26,8 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
             _userManager = userManager;
             _authManager = authManager;
         }
-        [HttpPost]
-        public async Task<IActionResult> RegisterUser([FromBody] UserRegistrationDto userRegistration)
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterUser(UserRegistrationDto userRegistration)
         {
             var user = _mapper.Map<User>(userRegistration);
             var result = await _userManager.CreateAsync(user, userRegistration.Password);
@@ -39,7 +39,7 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
                 }
                 return BadRequest(ModelState);
             }
-            await _userManager.AddToRolesAsync(user, userRegistration.Roles);
+            await _userManager.AddToRolesAsync(user, new List<string>() { "User" });
             return StatusCode(201);
         }
         [HttpPost("login")]
@@ -51,7 +51,10 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
                 _logger.LogWarn(warn);
                 return Unauthorized(warn);
             }
-            return Ok(new { Token = await _authManager.CreateToken() });
+            var userEntity = await _authManager.GetUserAsync(user.UserName);
+            var userDto = _mapper.Map<UserDto>(userEntity);
+            userDto.Roles = await _userManager.GetRolesAsync(userEntity);
+            return Ok(new { Token = await _authManager.CreateToken(), User = userDto });
         }
     }
 }

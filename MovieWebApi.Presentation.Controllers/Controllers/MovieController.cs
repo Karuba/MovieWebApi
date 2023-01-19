@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MovieWebApi.Contracts.Dto;
@@ -15,11 +16,13 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
     {
         private readonly IServiceManager _serviceManager;
         private readonly IHttpContextAccessor _httpContext;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public MovieController(IServiceManager service, IHttpContextAccessor httpContext)
+        public MovieController(IServiceManager service, IHttpContextAccessor httpContext, IWebHostEnvironment hostEnvironment)
         {
             _serviceManager = service;
             _httpContext = httpContext;
+            _hostEnvironment = hostEnvironment;
         }
 
         [HttpGet]
@@ -35,7 +38,7 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
             return Ok(movieDto);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateMovieAsync([FromBody] MovieCreateDto movieCreate)
+        public async Task<IActionResult> CreateMovieAsync( MovieCreateDto movieCreate)
         {
             var movieDto = await _serviceManager.movieService.CreateMovie(movieCreate);
             return Ok(movieDto); //CreatedAtRoute("Movie", new {id = movieDto.Id}, movieDto);
@@ -69,6 +72,31 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
         {
             await _serviceManager.movieService.DeleteMovieStarringAsync(id, starringId);
             return NoContent();
+        }
+        [HttpPost("UploadImage")]
+        public async Task<IActionResult> UploadImage()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                string fName = file.FileName;
+                string path = Path.Combine(_hostEnvironment.ContentRootPath, "Images", "Movie", file.FileName);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                return Ok($"{file.FileName} successfully uploaded to the Server");
+            }
+            catch (Exception ex)
+            {
+                throw;  
+            }
+        }
+        [HttpGet("image/{imageName}")]
+        public async Task<IActionResult> GetImage(string imageName)
+        {
+            var b = await System.IO.File.ReadAllBytesAsync(Path.Combine(_hostEnvironment.ContentRootPath, "Images", "Movie", $"{imageName}"));
+            return File(b, "image/jpeg");
         }
     }
 }

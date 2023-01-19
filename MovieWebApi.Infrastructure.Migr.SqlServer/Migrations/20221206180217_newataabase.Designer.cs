@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieWebApi.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using MovieWebApi.Infrastructure.Data;
 namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20221206180217_newataabase")]
+    partial class newataabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,15 +53,15 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8a11c6dd-2f05-47dc-becf-9c36b1e82ea4",
-                            ConcurrencyStamp = "cb15c146-65ad-405e-8ffb-5b31573c7762",
+                            Id = "cd4e4164-72c1-41d5-a875-2224b732b337",
+                            ConcurrencyStamp = "218bf0e1-a810-46fe-8f81-6f1f12ba9bcf",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "30c1ee68-fe9e-42a5-a731-5da0a5c8796f",
-                            ConcurrencyStamp = "800f4d40-e6a0-4be0-b7d2-08e672dc4a13",
+                            Id = "d1fe425a-efd1-4caa-8aa0-d578b6ecf0fc",
+                            ConcurrencyStamp = "f71fdf33-dbb2-466e-9691-f20613cd19dd",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -178,10 +180,6 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
                         .HasColumnName("MovieId");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Image")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -306,6 +304,14 @@ namespace MovieWebApi.Infrastructure.Migr.SqlServer.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
