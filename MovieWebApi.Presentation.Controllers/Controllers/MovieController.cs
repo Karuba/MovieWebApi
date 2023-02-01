@@ -37,8 +37,8 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
             var movieDto = await _serviceManager.movieService.GetMovieAsync(id);
             return Ok(movieDto);
         }
-        [HttpPost]
-        public async Task<IActionResult> CreateMovieAsync( MovieCreateDto movieCreate)
+        [HttpPost, Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> CreateMovieAsync([FromBody] MovieCreateDto movieCreate)
         {
             var movieDto = await _serviceManager.movieService.CreateMovie(movieCreate);
             return Ok(movieDto); //CreatedAtRoute("Movie", new {id = movieDto.Id}, movieDto);

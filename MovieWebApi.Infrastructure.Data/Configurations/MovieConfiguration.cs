@@ -14,7 +14,8 @@ namespace MovieWebApi.Infrastructure.Data.Configurations
                     Id = "01abbca8-664d-4b20-b5de-024705497d4a",
                     Name = "Pulp Fiction",
                     Description = "This is film was made by Quentin Tarantino",
-                    Rating = null,
+                    Rating = 4,
+                    Image = "pulpfiction.webp"
                 },
                 new Movie
                 {
@@ -22,6 +23,7 @@ namespace MovieWebApi.Infrastructure.Data.Configurations
                     Name = "Snatch",
                     Description = "This is film was made by Guy Ritchie",
                     Rating = 3,
+                    Image = "snatch.webp"
                 },
                 new Movie
                 {
@@ -29,6 +31,7 @@ namespace MovieWebApi.Infrastructure.Data.Configurations
                     Name = "The Big Lebowski",
                     Description = "Two goons mistake 'the Dude' Lebowski for a millionaire Lebowski and urinate on his rug.",
                     Rating = 5,
+                    Image = "dude.webp"
                 }
             );
         }

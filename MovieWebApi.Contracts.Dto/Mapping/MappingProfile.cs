@@ -15,7 +15,7 @@ namespace MovieWebApi.Contracts.Dto.Mapping
                 SecondName = x.SecondName,
                 Id = Guid.Parse(x.Id),
             })));
-            CreateMap<Movie, MovieCreateDto>().ReverseMap();
+            CreateMap<MovieCreateDto, Movie>().ForMember(c => c.Id, opt => opt.MapFrom(x => Guid.NewGuid().ToString()));
             CreateMap<Movie, MovieUpdateDto>().ReverseMap();
             CreateMap<Starring, StarringDto>().ReverseMap();
             CreateMap<Starring, StarringCreateDto>().ReverseMap();
