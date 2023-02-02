@@ -43,19 +43,19 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
             var movieDto = await _serviceManager.movieService.CreateMovie(movieCreate);
             return Ok(movieDto); //CreatedAtRoute("Movie", new {id = movieDto.Id}, movieDto);
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteMovieAsync(Guid id)
         {
             await _serviceManager.movieService.DeleteMovie(id);
             return NoContent();
         }
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), Authorize(Roles = "Administrator")]
         public async Task<IActionResult> UpdateMovieAsync(Guid id, [FromBody] MovieUpdateDto movieUpdate)
         {
             var movieDto = await _serviceManager.movieService.UpdateMovieAsync(id, movieUpdate);
             return Ok(movieDto); // CreatedAtRoute("Movie", new { id = movieDto.Id }, movieDto);
         }
-        [HttpPost("{id}")]
+        [HttpPost("{id}"), Authorize(Roles = "Administrator")]
         public async Task<IActionResult> UpdateMovieRatingAsync(Guid id, [FromBody] UserRatingUpdateDto userRatingUpdate)
         {
             var movieDto = await _serviceManager.movieService.UpdateMovieRatingAsync(id, userRatingUpdate);
@@ -73,7 +73,7 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
             await _serviceManager.movieService.DeleteMovieStarringAsync(id, starringId);
             return NoContent();
         }
-        [HttpPost("UploadImage")]
+        [HttpPost("UploadImage"), Authorize(Roles = "Administrator")]
         public async Task<IActionResult> UploadImage()
         {
             try
