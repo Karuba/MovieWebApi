@@ -23,6 +23,7 @@ namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
             .OrderBy(e => e.Name)
             .Skip(movieParameters.PageSize * (movieParameters.PageNumber - 1))
             .Take(movieParameters.PageSize)
+            .Where(e => e.Name.Contains(movieParameters.MovieName ?? e.Name))
             .Include(c => c.MovieStarrings)
             .ThenInclude(c => c.Starring)
             .ToListAsync();

@@ -73,7 +73,7 @@ namespace MovieWebApi.Infrastructure.Business.Services
         
         public async Task<MovieDto> UpdateMovieRatingAsync(Guid id, UserRatingUpdateDto userRatingUpdate)
         {
-            var user = await _authentication.GetUserAsync(userRatingUpdate.UserId);
+            var user = await _authentication.GetUserAsync(userRatingUpdate.UserName);
             if (user is null)
                 throw new NotFoundException($"The User is not registered");
 

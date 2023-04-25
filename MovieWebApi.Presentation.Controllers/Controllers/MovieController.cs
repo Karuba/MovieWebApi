@@ -37,25 +37,25 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
             var movieDto = await _serviceManager.movieService.GetMovieAsync(id);
             return Ok(movieDto);
         }
-        [HttpPost, Authorize(Roles = "Administrator")]
+        [HttpPost/*, Authorize(Roles = "Administrator")*/]
         public async Task<IActionResult> CreateMovieAsync([FromBody] MovieCreateDto movieCreate)
         {
             var movieDto = await _serviceManager.movieService.CreateMovie(movieCreate);
             return Ok(movieDto); //CreatedAtRoute("Movie", new {id = movieDto.Id}, movieDto);
         }
-        [HttpDelete("{id}"), Authorize(Roles = "Administrator")]
+        [HttpDelete("{id}")/*, Authorize(Roles = "Administrator")*/]
         public async Task<IActionResult> DeleteMovieAsync(Guid id)
         {
             await _serviceManager.movieService.DeleteMovie(id);
             return NoContent();
         }
-        [HttpPut("{id}"), Authorize(Roles = "Administrator")]
+        [HttpPut("{id}")/*, Authorize(Roles = "Administrator")*/]
         public async Task<IActionResult> UpdateMovieAsync(Guid id, [FromBody] MovieUpdateDto movieUpdate)
         {
             var movieDto = await _serviceManager.movieService.UpdateMovieAsync(id, movieUpdate);
             return Ok(movieDto); // CreatedAtRoute("Movie", new { id = movieDto.Id }, movieDto);
         }
-        [HttpPost("{id}"), Authorize(Roles = "Administrator")]
+        [HttpPost("{id}")/*, Authorize(Roles = "Administrator")*/]
         public async Task<IActionResult> UpdateMovieRatingAsync(Guid id, [FromBody] UserRatingUpdateDto userRatingUpdate)
         {
             var movieDto = await _serviceManager.movieService.UpdateMovieRatingAsync(id, userRatingUpdate);
@@ -73,7 +73,7 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
             await _serviceManager.movieService.DeleteMovieStarringAsync(id, starringId);
             return NoContent();
         }
-        [HttpPost("UploadImage"), Authorize(Roles = "Administrator")]
+        [HttpPost("UploadImage")/*, Authorize(Roles = "Administrator")*/]
         public async Task<IActionResult> UploadImage()
         {
             try
