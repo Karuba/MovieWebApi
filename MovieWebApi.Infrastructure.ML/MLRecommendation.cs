@@ -52,7 +52,7 @@ namespace MovieWebApi.Infrastructure.ML
                 MatrixColumnIndexColumnName = "userIdEncoded",
                 MatrixRowIndexColumnName = "movieIdEncoded",
                 LabelColumnName = "Rating",
-                NumberOfIterations = 20,
+                NumberOfIterations = 500,
                 ApproximationRank = 100
             };
 

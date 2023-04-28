@@ -18,4 +18,9 @@ namespace MovieWebApi.Infrastructure.ML.DataModels
     {
         public float Score { get; set; }
     }
+    public class MovieRatingDto
+    {
+        public string UserId { get; set; }
+        public string MovieId { get; set; }
+    }
 }
