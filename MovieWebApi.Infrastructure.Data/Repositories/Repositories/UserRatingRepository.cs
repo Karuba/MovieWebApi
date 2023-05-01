@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MovieWebApi.Domain.Core.Entities;
 using MovieWebApi.Domain.Interfaces.Repositories;
-using MovieWebApi.Domain.Interfaces.RequestFeatures;
 
 namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
 {
@@ -22,5 +21,8 @@ namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
 
         public async Task<UserRating> GetUserRating(string userId, string movieId, bool trackChanges = false) =>
             await FindByCondition(us => us.UserId.Equals(userId) && us.MovieId.Equals(movieId), trackChanges).FirstOrDefaultAsync();
+
+        public async Task<UserRating> UserRatingExistByUser(string userId, bool trackChanges = false) =>
+            await FindByCondition(ur => ur.UserId.Equals(userId), trackChanges).FirstOrDefaultAsync();
     }
 }

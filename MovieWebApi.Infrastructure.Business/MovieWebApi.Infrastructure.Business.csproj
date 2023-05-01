@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MovieWebApi.Infrastructure.ML\MovieWebApi.Infrastructure.ML.csproj" />
     <ProjectReference Include="..\MovieWebApi.Services.Interfaces\MovieWebApi.Services.Interfaces.csproj" />
   </ItemGroup>
 

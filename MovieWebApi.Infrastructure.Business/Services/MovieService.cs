@@ -5,6 +5,7 @@ using MovieWebApi.Domain.Core.Entities;
 using MovieWebApi.Domain.Interfaces.Exceptions;
 using MovieWebApi.Domain.Interfaces.Repositories;
 using MovieWebApi.Domain.Interfaces.RequestFeatures;
+using MovieWebApi.Infrastructure.ML;
 using MovieWebApi.Services.Interfaces;
 using MovieWebApi.Services.Interfaces.Authentication;
 
@@ -15,12 +16,14 @@ namespace MovieWebApi.Infrastructure.Business.Services
         private readonly IRepositoryManager _repository;
         private readonly IMapper _mapper;
         private readonly IAuthenticationManager _authentication;
+        private readonly IMLRecommendation _recommendation;
 
-        public MovieService(IRepositoryManager repository, IMapper mapper, IAuthenticationManager authentication)
+        public MovieService(IRepositoryManager repository, IMapper mapper, IAuthenticationManager authentication, IMLRecommendation recommendation)
         {
             _repository = repository;
             _mapper = mapper;
             _authentication = authentication;
+            _recommendation = recommendation;
         }
 
         public async Task<MovieDto> CreateMovie(MovieCreateDto movieData)
@@ -42,6 +45,8 @@ namespace MovieWebApi.Infrastructure.Business.Services
 
             _repository.Movie.DeleteMovie(movie);
             await _repository.SaveAsync();
+
+            _recommendation.ReBuild();
         }
 
         public async Task<MovieDto> GetMovieAsync(Guid id)
@@ -102,6 +107,8 @@ namespace MovieWebApi.Infrastructure.Business.Services
             movie.Rating = Math.Truncate(rating * 100) / 100;
 
             await _repository.SaveAsync();
+
+            _recommendation.ReBuild();
 
             return _mapper.Map<MovieDto>(movie);
         }

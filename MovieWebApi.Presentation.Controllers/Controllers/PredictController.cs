@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.ML;
+using MovieWebApi.Domain.Interfaces.Exceptions;
+using MovieWebApi.Domain.Interfaces.RequestFeatures;
 using MovieWebApi.Infrastructure.ML;
 using MovieWebApi.Infrastructure.ML.DataModels;
+using MovieWebApi.Services.Interfaces;
+using MovieWebApi.Services.Interfaces.Authentication;
 
 namespace MovieWebApi.Presentation.Controllers.Controllers
 {
@@ -9,26 +13,35 @@ namespace MovieWebApi.Presentation.Controllers.Controllers
     [Route("api/predict")]
     public class PredictController : ControllerBase
     {
-        private readonly PredictionEnginePool<MovieRating, ModelOutput> _predictionEnginePool;
         private readonly IMLRecommendation _mlRecommendation;
+        private readonly IServiceManager _serviceManager;
+        private readonly IAuthenticationManager _authenticationManager;
 
-        public PredictController(PredictionEnginePool<MovieRating, ModelOutput> predictionEnginePool, IMLRecommendation mlRecommendation)
+        public PredictController(IMLRecommendation mlRecommendation, IServiceManager serviceManager, IAuthenticationManager authenticationManager)
         {
-            _predictionEnginePool = predictionEnginePool;
             _mlRecommendation = mlRecommendation;
+            _serviceManager = serviceManager;
+            _authenticationManager = authenticationManager;
         }
 
         [HttpPost]
-        public async Task<IActionResult> UserRatingPredict([FromBody] MovieRating input)
+        public async Task<IActionResult> UserRatingPredict([FromBody] UserRecommendationParameters parameters)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            ModelOutput prediction = await Task.FromResult(_predictionEnginePool.Predict(input));
+            //ModelOutput prediction = await Task.FromResult(_predictionEnginePool.Predict(input));
+            //return Ok(prediction.Score.ToString());
 
-            return Ok(prediction.Score.ToString());
+            var user = await _authenticationManager.GetUserAsync(parameters.UserName);
+            if (user is null)
+                throw new NotFoundException($"user {parameters.UserName} doesn't exist");
+
+            var movies = await _serviceManager.predictService.GetUserRecommendation(user);
+            return Ok(movies);
+
         }
         [HttpPut]
         public IActionResult PredicModelRebuild()

@@ -10,5 +10,6 @@ namespace MovieWebApi.Domain.Interfaces.Repositories
         void AddMovie(Movie movie);
         void UpdateMovie(Movie movie);
         void DeleteMovie(Movie movie);
+        Task<IEnumerable<Movie>> GetMoviesForRecommendationAsync(string userId, bool trackChanges = false);
     }
 }

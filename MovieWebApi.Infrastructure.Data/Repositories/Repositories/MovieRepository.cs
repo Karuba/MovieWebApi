@@ -7,9 +7,12 @@ namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
 {
     public class MovieRepository : RepositoryBase<Movie>, IMovieRepository
     {
+        private readonly RepositoryContext _repositoryContext;
+
         public MovieRepository(RepositoryContext repositoryContext)
             : base(repositoryContext)
         {
+            _repositoryContext = repositoryContext;
         }
 
         public async Task<Movie> GetMovieAsync(string id, bool trackChanges = false) =>
@@ -33,6 +36,24 @@ namespace MovieWebApi.Infrastructure.Data.Repositories.Repositories
         public void UpdateMovie(Movie movie) => Update(movie);
 
         public void DeleteMovie(Movie movie) => Delete(movie);
+
+        public async Task<IEnumerable<Movie>> GetMoviesForRecommendationAsync(string userId, bool trackChanges = false) =>
+            await FindByCondition(movie => 
+                _repositoryContext
+                    .Set<UserRating>()
+                    .Where(ur => 
+                        ur.MovieId.Equals(movie.Id) && !ur.UserId.Equals(userId))
+                    .FirstOrDefault() 
+            != null
+            &&
+            _repositoryContext
+                    .Set<UserRating>()
+                    .Where(ur =>
+                        ur.MovieId.Equals(movie.Id) && ur.UserId.Equals(userId))
+                    .FirstOrDefault()
+            == null
+            , trackChanges)
+                .ToListAsync();
 
     }
 }

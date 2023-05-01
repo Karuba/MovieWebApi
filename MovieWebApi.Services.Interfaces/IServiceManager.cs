@@ -6,6 +6,6 @@ namespace MovieWebApi.Services.Interfaces
     {
         IMovieService movieService { get; }
         IStarringService starringService { get; }
-        IAuthenticationManager authenticationManager { get; }
+        IPredictService predictService { get; }
     }
 }
