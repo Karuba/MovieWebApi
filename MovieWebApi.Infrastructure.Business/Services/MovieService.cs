@@ -99,7 +99,7 @@ namespace MovieWebApi.Infrastructure.Business.Services
 
             var rating = await _repository.UserRating.GetMovieRating(id.ToString());
 
-            movie.Rating = rating;
+            movie.Rating = Math.Truncate(rating * 100) / 100;
 
             await _repository.SaveAsync();
 
